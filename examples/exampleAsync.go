@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func helloWorld() {
+func helloWorld(n int) {
 	fmt.Println("Hello World")
 }
 
@@ -15,7 +15,6 @@ func HelloWorldAtN(n int) {
 		actions[i] = async.ActionWithData{
 			Name: "helloWorld",
 			Function: func() (interface{}, error) {
-				helloWorld()
 				return nil, nil
 			},
 		}
