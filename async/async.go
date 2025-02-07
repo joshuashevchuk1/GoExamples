@@ -1,4 +1,4 @@
-package concurrencyLearning
+package async
 
 import (
 	"errors"
@@ -90,4 +90,21 @@ func ParallelWithData(actions ...ActionWithData) ActionDataMap {
 		}
 	}
 	return dataMap
+}
+
+func LimitedParallelWithData(parallelism int, actions ...ActionWithData) ActionDataMap {
+	results := make(ActionDataMap, len(actions))
+	for parallelism < len(actions) {
+		chunks := actions[0:parallelism]
+		actions = actions[parallelism:]
+		for k, v := range ParallelWithData(chunks...) {
+			results[k] = v
+		}
+	}
+	if len(actions) > 0 {
+		for k, v := range ParallelWithData(actions...) {
+			results[k] = v
+		}
+	}
+	return results
 }
