@@ -1,3 +1,3 @@
-module tempProject
+module GoExamples
 
 go 1.23.5
